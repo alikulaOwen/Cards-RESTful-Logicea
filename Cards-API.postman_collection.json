@@ -1,0 +1,447 @@
+{
+	"info": {
+		"_postman_id": "8420b3c7-b0c4-4aff-8371-54726feb9faa",
+		"name": "Cards-API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23044139"
+	},
+	"item": [
+		{
+			"name": "security",
+			"item": [
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var template = `",
+									"<canvas id=\"myChart\" height=\"75\"></canvas>",
+									"",
+									"<script src=\"https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js\"></script> ",
+									"",
+									"<script>",
+									"    var ctx = document.getElementById(\"myChart\");",
+									"",
+									"    var myChart = new Chart(ctx, {",
+									"        type: \"line\",",
+									"        data: {",
+									"            labels: [\"User Email\", \"Username\", \"First Name\", \"Last Name\", \"Role\"],",
+									"            datasets: [{",
+									"                data: [{{response.data.userEmail}}, {{response.data.username}}, {{response.data.firstName}}, {{response.data.lastName}}, {{response.data.role}}],",
+									"                label: 'User Data',",
+									"                borderColor: \"#3e95cd\",",
+									"                fill: false",
+									"            }]",
+									"        },",
+									"        options: {",
+									"            title: {",
+									"                display: true,",
+									"                text: 'User Information'",
+									"            },",
+									"            scales: {",
+									"                yAxes: [{",
+									"                    ticks: {",
+									"                        beginAtZero: true",
+									"                    }",
+									"                }]",
+									"            }",
+									"        }",
+									"",
+									"    });",
+									"",
+									"    // Access the data passed to pm.visualizer.set() from the JavaScript",
+									"    // code of the Visualizer template",
+									"    pm.getData(function (err, value) {",
+									"        myChart.data.datasets[0].data = [value.response.data.userEmail, value.response.data.username, value.response.data.firstName, value.response.data.lastName, value.response.data.role];",
+									"        myChart.update();",
+									"    });",
+									"",
+									"</script>`;",
+									"",
+									"function constructVisualizerPayload() {",
+									"    var res = pm.response.json();",
+									"    var visualizerData = {",
+									"        data: res.data",
+									"    };",
+									"",
+									"    return {response: visualizerData};",
+									"}",
+									"",
+									"pm.visualizer.set(template, constructVisualizerPayload());"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userEmail\": \"benjaminsinzore@gmail.com\",\r\n  \"password\": \"PASSWORD_BENJAMIN\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7125/api/Security/Login",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7125",
+							"path": [
+								"api",
+								"Security",
+								"Login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Operations",
+			"item": [
+				{
+					"name": "CreateCards",
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "headerPrefix",
+									"value": "Bearer",
+									"type": "string"
+								},
+								{
+									"key": "clientSecret",
+									"value": "0BCeWnVP6vptmwYd",
+									"type": "string"
+								},
+								{
+									"key": "clientId",
+									"value": "2BPsf9zuGCW4nDuXcfn32G0wuYqxnNN1",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"cardName\": \"Card Jane 1\",\r\n  \"cardDescription\": \"Card for Test by Jane Doe\",\r\n  \"cardColor\": \"HYYuYY\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7125/api/Operations/CreateCard",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7125",
+							"path": [
+								"api",
+								"Operations",
+								"CreateCard"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAllCards",
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "headerPrefix",
+									"value": "Bearer",
+									"type": "string"
+								},
+								{
+									"key": "clientSecret",
+									"value": "0BCeWnVP6vptmwYd",
+									"type": "string"
+								},
+								{
+									"key": "clientId",
+									"value": "2BPsf9zuGCW4nDuXcfn32G0wuYqxnNN1",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"pageNumber\": 1,\r\n  \"pageSize\": 20\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7125/api/Operations/GetAllCards",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7125",
+							"path": [
+								"api",
+								"Operations",
+								"GetAllCards"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetSpecificCard",
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "headerPrefix",
+									"value": "Bearer",
+									"type": "string"
+								},
+								{
+									"key": "clientSecret",
+									"value": "0BCeWnVP6vptmwYd",
+									"type": "string"
+								},
+								{
+									"key": "clientId",
+									"value": "2BPsf9zuGCW4nDuXcfn32G0wuYqxnNN1",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cardId\":\"CARD_9187D8B0-29BD-431A-A4B7-C8499311C02F\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7125/api/Operations/GetSpecificCard",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7125",
+							"path": [
+								"api",
+								"Operations",
+								"GetSpecificCard"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SearchCard",
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "headerPrefix",
+									"value": "Bearer",
+									"type": "string"
+								},
+								{
+									"key": "clientSecret",
+									"value": "0BCeWnVP6vptmwYd",
+									"type": "string"
+								},
+								{
+									"key": "clientId",
+									"value": "2BPsf9zuGCW4nDuXcfn32G0wuYqxnNN1",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"searchKey\":\"CARD\",\r\n    \"pageNumber\": 1,\r\n    \"pageSize\": 30\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7125/api/Operations/SearchCard",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7125",
+							"path": [
+								"api",
+								"Operations",
+								"SearchCard"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateCard",
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "headerPrefix",
+									"value": "Bearer",
+									"type": "string"
+								},
+								{
+									"key": "clientSecret",
+									"value": "0BCeWnVP6vptmwYd",
+									"type": "string"
+								},
+								{
+									"key": "clientId",
+									"value": "2BPsf9zuGCW4nDuXcfn32G0wuYqxnNN1",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"cardID\": \"CARD_E7F97A06-039B-4FC4-87DF-71530DC5AA82\",\r\n  \"fieldToUpdate\": \"name\",\r\n  \"updateValue\": \"Benjie Card Test\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7125/api/Operations/UpdateCard",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7125",
+							"path": [
+								"api",
+								"Operations",
+								"UpdateCard"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteCard",
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "headerPrefix",
+									"value": "Bearer",
+									"type": "string"
+								},
+								{
+									"key": "clientSecret",
+									"value": "0BCeWnVP6vptmwYd",
+									"type": "string"
+								},
+								{
+									"key": "clientId",
+									"value": "2BPsf9zuGCW4nDuXcfn32G0wuYqxnNN1",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"cardId\": \"CARD_E7F97A06-039B-4FC4-87DF-71530DC5AA82\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7125/api/Operations/DeleteCard",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7125",
+							"path": [
+								"api",
+								"Operations",
+								"DeleteCard"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

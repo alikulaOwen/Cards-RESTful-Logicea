@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Cards</name>
+    </assembly>
+    <members>
+        <member name="M:Cards.Controllers.Operatons.OperationsController.CreateCard(Models.CreateCardsRequest)">
+            <summary>
+            CreateCard - Endpoint; used to create and save new cards. In Requestbody, it accepts CardName, CardDescription, and CardColor
+            If successful, returns cardId, cardName, createdOn, and a message = "Card was successfully"
+            Authorization is through OAuth 2.0 - Bearer Token
+            </summary>
+            <returns>
+            Status code - 200, if successful and cardId, cardName, createdOn, and a message = "Card was successfully"
+            </returns>
+        </member>
+        <member name="M:Cards.Controllers.Operatons.OperationsController.GetAllCards(Models.GetAllCardsRequest)">
+            <summary>
+            GetAllCards - Endpoint; used to retrive all cards from the database. In Requestbody, it accepts PageNumber, PageSize
+            If successful, returns cardId, cardName, cardDescription, cardColor, createdOn, createdBy, cardStatus
+            Authorization is through OAuth 2.0 - Bearer Token
+            </summary>
+            <returns>
+            Status code - 200, if successful, returns cardId, cardName, cardDescription, cardColor, createdOn, createdBy, cardStatus
+            </returns>
+        </member>
+        <member name="M:Cards.Controllers.Operatons.OperationsController.GetSpecificCard(Models.GetSpecificCardsRequest)">
+            <summary>
+            GetSpecificCard - Endpoint; used to retrive a specific card from the database, using it's ID. 
+            In Requestbody, it accepts CardId
+            If successful, returns cardId, cardName, cardDescription, cardColor, createdOn, createdBy, cardStatus
+            Authorization is through OAuth 2.0 - Bearer Token
+            </summary>
+            <returns>
+            Status code - 200, if successful, returns cardId, cardName, cardDescription, cardColor, createdOn, createdBy, cardStatus
+            </returns>
+        </member>
+        <member name="M:Cards.Controllers.Operatons.OperationsController.SearchCard(Models.SearchCardsRequest)">
+            <summary>
+            SearchCard - Endpoint; used to search retrive all cards from the database, which contain the searchKey. In Requestbody, it accepts SearchKey, PageNumber, and PageSize
+            If successful, returns cardId, cardName, cardDescription, cardColor, createdOn, createdBy, cardStatus
+            Authorization is through OAuth 2.0 - Bearer Token
+            </summary>
+            <returns>
+            Status code - 200, if successful, returns cardId, cardName, cardDescription, cardColor, createdOn, createdBy, cardStatus
+            </returns>
+        </member>
+        <member name="M:Cards.Controllers.Operatons.OperationsController.UpdateCard(Models.UpdateCard)">
+            <summary>
+            UpdateCard - Endpoint; used to update cards field in the database; these fields are CardName, CardDescription, CardColor, and CardStatus. 
+            In Requestbody, it accepts CardID, FieldToUpdate which must be either of these ("name", "status", "description", "color" - all in lowercase), and UpdateValue
+            If successful, returns Message = "Card was updated successfuly"
+            Authorization is through OAuth 2.0 - Bearer Token
+            </summary>
+            <returns>
+            Status code - 200, if successful, returns Message = "Card was updated successfuly"
+            </returns>
+        </member>
+        <member name="M:Cards.Controllers.Operatons.OperationsController.DeleteCard(Models.GetSpecificCardsRequest)">
+            <summary>
+            DeleteCard - Endpoint; used to delete a specific card from the database, using it's ID
+            In Requestbody, it accepts CardID
+            If successful, returns Message = "Card was deleted successfuly"
+            Authorization is through OAuth 2.0 - Bearer Token
+            </summary>
+            <returns>
+            Status code - 200, if successful, returns Message = "Card was deleted successfuly"
+            </returns>
+        </member>
+        <member name="M:Cards.Controllers.Security.SecurityController.Login(Models.UserLoginModel)">
+            <summary>
+            This is the first endpoint, use this endpoin to login to the system.
+            Accespts, user email and password, checks for their validity of and generates a token if the user's email and password are all valid.
+            The generated token is used to authorize all other endpoints.
+            </summary>
+            <returns>
+            If user's email and password are valied; the endpoint returns:
+            Username, FirstName, LastName, Role and Token
+            </returns>
+        </member>
+    </members>
+</doc>
